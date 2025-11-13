@@ -2,7 +2,7 @@ name: KB-251 Telegram schedule bot
 
 on:
   schedule:
-    # каждые 5 минут (GitHub Actions не умеет чаще):contentReference[oaicite:5]{index=5}
+    # каждые 5 минут
     - cron: "*/5 * * * *"
   # возможность запустить вручную из вкладки Actions
   workflow_dispatch:
