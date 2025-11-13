@@ -1,0 +1,28 @@
+name: KB-251 Telegram schedule bot
+
+on:
+  schedule:
+    # каждые 5 минут (GitHub Actions не умеет чаще):contentReference[oaicite:5]{index=5}
+    - cron: "*/5 * * * *"
+  # возможность запустить вручную из вкладки Actions
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run bot
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          python bot.py
